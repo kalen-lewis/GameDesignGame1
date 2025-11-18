@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMotor : MonoBehaviour
+public class PlayerMotor2 : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
