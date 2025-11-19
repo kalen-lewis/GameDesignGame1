@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "1 pov shooter.sln"
+    "dotnet.defaultSolution": "GameDesignGame1.sln"
 }
