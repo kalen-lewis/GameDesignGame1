@@ -653,11 +653,15 @@ PrefabInstance:
       objectReference: {fileID: 768159279}
     - target: {fileID: 5342019953550820595, guid: e611dc5db6494564692665c772e727a6, type: 3}
       propertyPath: fieldOfView
-      value: 60
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5342019953550820595, guid: e611dc5db6494564692665c772e727a6, type: 3}
       propertyPath: visionRange
-      value: 5
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5342019953550820595, guid: e611dc5db6494564692665c772e727a6, type: 3}
+      propertyPath: loseSightTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5342019953550820595, guid: e611dc5db6494564692665c772e727a6, type: 3}
       propertyPath: patrolPoints.Array.data[0]
@@ -685,11 +689,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8612796079062514600, guid: e611dc5db6494564692665c772e727a6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2377.42
+      value: 2383.4
       objectReference: {fileID: 0}
     - target: {fileID: 8612796079062514600, guid: e611dc5db6494564692665c772e727a6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8612796079062514600, guid: e611dc5db6494564692665c772e727a6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -697,7 +701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8612796079062514600, guid: e611dc5db6494564692665c772e727a6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8612796079062514600, guid: e611dc5db6494564692665c772e727a6, type: 3}
       propertyPath: m_LocalRotation.z
@@ -709,13 +713,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8612796079062514600, guid: e611dc5db6494564692665c772e727a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 8612796079062514600, guid: e611dc5db6494564692665c772e727a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3052521535449674665, guid: e611dc5db6494564692665c772e727a6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

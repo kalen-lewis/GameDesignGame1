@@ -5,114 +5,108 @@ public class EnemyPatrolChase : MonoBehaviour
 {
     [Header("Navigation")]
     public NavMeshAgent agent;
-    public Transform[] patrolPoints;
-    private int patrolIndex = 0;
 
-    [Header("Player Detection")]
+    [Header("Player Reference")]
     public Transform player;
-    public float visionRange = 12f;
-    public float fieldOfView = 60f;
-    public float loseSightTime = 2f; 
-    private float timeSinceLastSeen;
+    private bool playerInSight;
 
-    private enum AIState { Patrol, Chase }
-    private AIState currentState = AIState.Patrol;
+    [Header("Patrol Settings")]
+    public Transform[] patrolPoints;
+    private int currentPoint = 0;
 
-    private void Start()
+    [Header("Chase Settings")]
+    public float chaseRange = 10f;
+    public float stopRange = 2f;
+    public float fieldOfView = 90f;
+
+    [Header("Vision Settings")]
+    public LayerMask obstructionMask;
+
+    void Start()
     {
         if (agent == null)
             agent = GetComponent<NavMeshAgent>();
 
-        GoToNextPoint();
-
         if (player == null)
-        {
-            GameObject p = GameObject.FindGameObjectWithTag("Player");
-            if (p != null) player = p.transform;
-        }
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        SetNextPatrolPoint();
     }
 
-    private void Update()
+    void Update()
     {
-        if (player == null)
-            return;
+        DetectPlayer();
 
-        bool canSeePlayer = CanSeePlayer();
-
-        switch (currentState)
+        if (playerInSight)
         {
-            case AIState.Patrol:
-                PatrolState(canSeePlayer);
-                break;
-
-            case AIState.Chase:
-                ChaseState(canSeePlayer);
-                break;
-        }
-    }
-
-    // ------------------------------------ PATROL
-    void PatrolState(bool canSeePlayer)
-    {
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
-            GoToNextPoint();
-
-        if (canSeePlayer)
-            currentState = AIState.Chase;
-    }
-
-    // ------------------------------------ CHASE
-    void ChaseState(bool canSeePlayer)
-    {
-        if (canSeePlayer)
-        {
-            agent.SetDestination(player.position);
-            timeSinceLastSeen = 0f;
+            ChasePlayer();
         }
         else
         {
-            timeSinceLastSeen += Time.deltaTime;
-
-            if (timeSinceLastSeen >= loseSightTime)
-            {
-                currentState = AIState.Patrol;
-                GoToNextPoint();
-            }
+            Patrol();
         }
     }
 
-    // ------------------------------------ DETECTION LOGIC
-    bool CanSeePlayer()
+    void DetectPlayer()
     {
-        Vector3 dirToPlayer = (player.position - transform.position).normalized;
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // If player too far → not visible
-        if (distance > visionRange)
-            return false;
-
-        // Check if player is inside vision cone
-        float angle = Vector3.Angle(transform.forward, dirToPlayer);
-        if (angle > fieldOfView * 0.5f)
-            return false;
-
-        // Raycast to ensure no objects block the view
-        if (Physics.Raycast(transform.position + Vector3.up, dirToPlayer, out RaycastHit hit, visionRange))
+        if (distance <= chaseRange)
         {
-            if (hit.collider.CompareTag("Player"))
-                return true;
+            Vector3 dir = (player.position - transform.position).normalized;
+            float angle = Vector3.Angle(transform.forward, dir);
+
+            if (angle <= fieldOfView / 2f)
+            {
+                if (!Physics.Raycast(transform.position + Vector3.up, dir, distance, obstructionMask))
+                {
+                    playerInSight = true;
+                    return;
+                }
+            }
         }
 
-        return false;
+        playerInSight = false;
+        agent.isStopped = false;
     }
 
-    // ------------------------------------ PATROL PATH
-    void GoToNextPoint()
+    void Patrol()
     {
-        if (patrolPoints.Length == 0)
-            return;
+        if (!agent.hasPath || agent.remainingDistance < 0.5f)
+            SetNextPatrolPoint();
 
-        agent.SetDestination(patrolPoints[patrolIndex].position);
-        patrolIndex = (patrolIndex + 1) % patrolPoints.Length;
+        agent.isStopped = false;
+    }
+
+    void SetNextPatrolPoint()
+    {
+        if (patrolPoints.Length == 0) return;
+
+        agent.SetDestination(patrolPoints[currentPoint].position);
+        currentPoint = (currentPoint + 1) % patrolPoints.Length;
+    }
+
+    void ChasePlayer()
+    {
+        agent.SetDestination(player.position);
+        agent.isStopped = false;
+
+        Vector3 dir = (player.position - transform.position).normalized;
+        dir.y = 0;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 6f);
+
+        if (Vector3.Distance(transform.position, player.position) <= stopRange)
+        {
+            agent.isStopped = true;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, chaseRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, stopRange);
     }
 }
