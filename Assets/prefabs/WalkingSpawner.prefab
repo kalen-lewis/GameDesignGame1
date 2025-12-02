@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1745546395298201478
+--- !u!1 &1393088128643947052
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,42 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5523689497385100791}
-  - component: {fileID: 6247135480248620929}
+  - component: {fileID: 1933256901914375467}
+  - component: {fileID: 7543562624638503613}
   m_Layer: 0
-  m_Name: spawner
+  m_Name: WalkingSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5523689497385100791
+--- !u!4 &1933256901914375467
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745546395298201478}
+  m_GameObject: {fileID: 1393088128643947052}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 736.7066, y: 1.5200002, z: 2383.3657}
+  m_LocalPosition: {x: 707.1, y: -5.20214, z: 2397.305}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6247135480248620929
+--- !u!114 &7543562624638503613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745546395298201478}
+  m_GameObject: {fileID: 1393088128643947052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64548f52a07c4a5499a8b16507a4059b, type: 3}
+  m_Script: {fileID: 11500000, guid: c053b6ddada9e6a4d8c9b64fd7415f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 7724063665465376759, guid: ee9e2fcf80347f0498d46a8481ae3234, type: 3}
-  spawnInterval: 7
-  maxEnemies: 10
+  patrolEnemyPrefab: {fileID: 0}
+  spawnLocations:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  maxEnemies: 3
+  spawnInterval: 30
