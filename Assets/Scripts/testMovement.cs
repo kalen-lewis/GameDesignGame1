@@ -79,4 +79,19 @@ public class testMovement : MonoBehaviour
         float rotate = Input.GetAxis("Mouse X") * rotateSpeed * Time.deltaTime;
         transform.Rotate(Vector3.up * rotate);
     }
+
+    // audio source
+    public AudioSource footstepsSound;
+
+    private void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            footstepsSound.enabled = true;
+        }
+        else
+        {
+            footstepsSound.enabled = false;
+        }
+    }
 }
