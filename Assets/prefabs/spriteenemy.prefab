@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7192713204751690847}
   - component: {fileID: 167383352789667808}
   - component: {fileID: 3052521535449674665}
-  - component: {fileID: 5342019953550820595}
+  - component: {fileID: 8649537809154423095}
   m_Layer: 0
   m_Name: spriteenemy
   m_TagString: Untagged
@@ -108,7 +108,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5342019953550820595
+--- !u!114 &8649537809154423095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,21 +117,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6038649869501734874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72720aa4f06ecae45a3d64ca6cbf1b34, type: 3}
+  m_Script: {fileID: 11500000, guid: 498e45eab4425484aa18688f298e7972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 167383352789667808}
-  player: {fileID: 0}
-  patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  chaseRange: 10
-  stopRange: 2
-  fieldOfView: 90
-  obstructionMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1001 &1514514589343853668
 PrefabInstance:
   m_ObjectHideFlags: 0
