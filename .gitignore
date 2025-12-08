@@ -96,3 +96,5 @@ fmod_editor.log
 /Assets/Plugins/FMOD/Cache/Editor.meta
 Packages/manifest.json
 Packages/packages-lock.json
+Assets/LowPolyFPSLite/LowPolyFPSLite_2021.3.0_HDRP_v1.0.unitypackage.meta
+Assets/LowPolyFPSLite/LowPolyFPSLite_2021.3.0_URP_v1.0.unitypackage.meta
