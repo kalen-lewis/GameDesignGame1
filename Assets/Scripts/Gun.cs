@@ -4,29 +4,29 @@ public class Gun : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float bulletSpeed = 20f;
-    public float fireRate = 0.2f;
-    public ParticleSystem muzzleFlash;
-    public AudioSource gunAudio;
+    public float bulletSpeed = 40f;
 
-    private float nextFireTime = 0f;
+    public AudioSource audioSource;
+    public AudioClip gunshotSound;
 
     void Update()
     {
-        if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+        if (Input.GetMouseButtonDown(0))
         {
             Shoot();
-            nextFireTime = Time.time + fireRate;
         }
     }
 
     void Shoot()
     {
+        // Spawn bullet
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+        // Push bullet forward
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.velocity = firePoint.forward * bulletSpeed;
-        muzzleFlash.Play();
-        gunAudio.Play();
 
-}
+        // Play sound
+        audioSource.PlayOneShot(gunshotSound);
+    }
 }
